@@ -31,7 +31,7 @@ export class DistanceService{
             )
 
             if (distancia <= radio){
-                if (!(conductor == null))
+                if (conductor)
                     conductoresDisponiblesCercanos.push(conductor);
             }
 

@@ -16,6 +16,7 @@ export class ViajeService {
             const viaje: Viaje = await this.data.ObtenerUno(
                 {"IDPasajero": body.pasajero, "Activo": true},
             );
+            const pasajero: Pasajero = await this.dataPasajero.obtenerUno({"ID": body.pasajero});
 
             if (viaje){
                 if (viaje.Activo){
@@ -23,7 +24,11 @@ export class ViajeService {
                 }
             }
 
-            this.validar.ubicacion(body.ubicacion);
+            if (pasajero.Ubicacion == body.ubicacionDestino){
+                throw new HttpException('Las ubicaciones no pueden ser las mismas.', HttpStatus.BAD_REQUEST); 
+            }
+
+            this.validar.ubicacion(body.ubicacionDestino);
 
             return this.data.solicitarViaje(body.pasajero, body.ubicacionDestino, body.metodoPago);
         } 
@@ -35,18 +40,16 @@ export class ViajeService {
     async completarViaje(body: any){
         try {
             this.validar.cuerpoVacio(body);
-            this.validar.arrayVacioNulo(Object.values(body));
             this.validar.propiedadesIncorrectas(body, ['ID', 'Valoracion']);
 
+            if (!body.ID || body.ID < 1){
+                throw new HttpException('El ID no puede ser nulo', HttpStatus.BAD_REQUEST);
+            }
+
             const viaje: Viaje = await this.data.ObtenerUno({"ID": body.ID});
-            const pasajero: Pasajero = await this.dataPasajero.obtenerUno({"ID": viaje.IDPasajero});
                         
             if (!viaje){
                 throw new HttpException('El viaje no existe', HttpStatus.BAD_REQUEST); 
-            }
-
-            if (pasajero.Ubicacion == viaje.UbicacionDestino){
-                throw new HttpException('Las ubicaciones no pueden ser las mismas.', HttpStatus.BAD_REQUEST); 
             }
 
             if (viaje.Completado){

@@ -18,14 +18,13 @@ export class ViajeData {
         try{
             const pasajero = await this.prisma.pasajero.findUnique({where: {ID: pasajeroId}});
             const conductorCercano: Conductor = (await this.distancia.obtenerConductoresDisponiblesCercanos(pasajero.Ubicacion, 1))[0];
-
+            console.log(conductorCercano)
             if (conductorCercano == null){
                 throw new HttpException('No hay conductores disponibles.', HttpStatus.BAD_REQUEST);
             }
 
             const viaje = this.obtenerDatosViaje(pasajero, conductorCercano, ubicacionDestino, metodoPago);
             
-            return;
             await this.prisma.viaje.create({data: viaje});
 
             this.actualizarDisponibilidadConductor(conductorCercano, false);

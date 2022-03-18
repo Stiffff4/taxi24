@@ -39,7 +39,6 @@ export class ValidationService {
         const error = new HttpException('Ubicacion invalida', HttpStatus.BAD_REQUEST);
 
         try {
-            console.log(ubicacion)
             const ubicacionArr: string[] = ubicacion.split(',');
 
             const latitud = parseFloat(ubicacionArr[0]);
