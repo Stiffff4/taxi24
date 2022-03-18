@@ -1,0 +1,291 @@
+{
+	"info": {
+		"_postman_id": "6d4d42d6-2333-45dc-a8cc-0fc27625dfc2",
+		"name": "Taxi24",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ObtenerMuchos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Disponible\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/conductor/ObtenerMuchos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"conductor",
+						"ObtenerMuchos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ObtenerUno",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ID\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/conductor/ObtenerUno",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"conductor",
+						"ObtenerUno"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Nombre\": \"ConductorA\",\r\n    \"Apellido\": \"ConductorAA\",\r\n    \"Edad\": 29,\r\n    \"ViajesCompletados\": 0,\r\n    \"Ubicacion\": \"18.4710722,-69.9150165\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/conductor/Agregar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"conductor",
+						"Agregar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"where\": {\r\n        \"ID\": 3\r\n    },\r\n    \"conductor\": {\r\n        \"Edad\": 30\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/conductor/Actualizar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"conductor",
+						"Actualizar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ID\": 12\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/conductor/Eliminar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"conductor",
+						"Eliminar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SolicitarViaje",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pasajero\": 2,\r\n    \"ubicacionDestino\": \"\",\r\n    \"metodoPago\": \"efectivo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/viaje/SolicitarViaje",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"viaje",
+						"SolicitarViaje"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CompletarViaje",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ID\": 1,\r\n    \"Valoracion\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/viaje/CompletarViaje",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"viaje",
+						"CompletarViaje"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ObtenerConductoresDisponibles (pasajero)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ubicacion\": \"18.4679683,-69.959637\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/pasajero/ObtenerConductoresCercanos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"pasajero",
+						"ObtenerConductoresCercanos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ObtenerConductoresDisponibles (conductor)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ubicacion\": \"18.4679683,-69.959637\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/conductor/ObtenerConductoresCercanos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"conductor",
+						"ObtenerConductoresCercanos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

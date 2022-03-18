@@ -1,0 +1,17 @@
+{
+   "type": "postgres",
+   "host": "localhost",
+   "port": 5434,
+   "username": "stiffff",
+   "password": "123",
+   "database": "taxi24db",
+   "synchronize": false,
+   "migrationsTableName": "migrations",
+   "entities": ["src/**/*.entity.ts"],
+   "migrations": [
+      "src/database/migrations/*.ts"
+   ],
+   "cli": {
+      "migrationsDir": "src/database/migrations"
+   }
+}

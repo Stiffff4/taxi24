@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  taxi24-db:
+    image: postgres:13
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_USER: stiffff
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: taxi24db
