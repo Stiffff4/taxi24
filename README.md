@@ -10,7 +10,7 @@ Este es un proyecto de evaluación del banco popular.
 ## Instrucciones de instalación
 
 ### Software imprescindible:
-- Descargar e instalar [Docker](https://www.docker.com/get-started), este será nuestro cliente de base de datos.
+- Descargar e instalar [Docker](https://www.docker.com/get-started), este será nuestro motor de base de datos.
 
 ### Dependencias
 
