@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { Conductor } from "@prisma/client";
 import { PrismaData } from "../../prisma/prisma.data"; 
 import { ValidationService } from "../../../services/Validation/validation.service";
-import { DistanceService } from "../../../services/Distance/distance.service";
+import { DistanceData } from "../../../services/Distance/distance.data";
 
 @Injectable()
 export class ConductorData {
@@ -10,7 +10,7 @@ export class ConductorData {
     constructor(
         private prisma: PrismaData, 
         private validar: ValidationService,
-        private distancia: DistanceService
+        private distancia: DistanceData
     ){}
 
     async obtenerConductoresDisponiblesCercanos(location: string){
@@ -23,9 +23,9 @@ export class ConductorData {
         }
     }
 
-    async obtenerMuchos(where?: Object){
+    async obtenerTodos(){
         try{
-            return await this.prisma.conductor.findMany({where: where});
+            return await this.prisma.conductor.findMany();
         }
         catch(error){
             this.validar.manejarError(error.toString());
@@ -33,11 +33,21 @@ export class ConductorData {
         }
     }
 
-    async obtenerUno(where: Object){
+    async obtenerPorId(id: number){
         try{
-            return await this.prisma.conductor.findFirst({where: where});
+            return await this.prisma.conductor.findFirst({where: {ID: id}});
         }
         catch (error){
+            this.validar.manejarError(error.toString());
+            throw new HttpException(`Error no manejado: ${error}`, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async obtenerConductoresDisponibles(){
+        try {
+            return await this.prisma.conductor.findMany({where: {Disponible: true}});
+        }
+        catch(error){
             this.validar.manejarError(error.toString());
             throw new HttpException(`Error no manejado: ${error}`, HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -11,9 +11,9 @@ export class VehiculoData {
         private prisma: PrismaData
     ){}
 
-    async obtenerMuchos(where?: Object){
+    async obtenerTodos(){
         try{
-            return await this.prisma.vehiculo.findMany({where: where})
+            return await this.prisma.vehiculo.findMany()
         }
         catch(error){
             this.validator.manejarError(error.toString());
@@ -21,9 +21,9 @@ export class VehiculoData {
         }
     }
 
-    async obtenerUno(where: Object){
+    async obtenerPorId(id: number){
         try{
-            return await this.prisma.vehiculo.findFirst({where: where});
+            return await this.prisma.vehiculo.findFirst({where: {ID: id}});
         }
         catch (error){
             this.validator.manejarError(error.toString());

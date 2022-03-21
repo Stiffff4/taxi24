@@ -2,7 +2,7 @@ import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundExc
 import { Viaje, Pasajero, Conductor } from "@prisma/client";
 import { PrismaData } from "../../prisma/prisma.data"; 
 import { ValidationService } from "../../../services/Validation/validation.service";
-import { DistanceService } from "../../../services/Distance/distance.service";
+import { DistanceData } from "../../../services/Distance/distance.data";
 import { FacturaData } from "../Factura/factura.data";
 
 @Injectable()
@@ -10,18 +10,13 @@ export class ViajeData {
     constructor(
         private prisma: PrismaData, 
         private validar: ValidationService,
-        private distancia: DistanceService,
+        private distancia: DistanceData,
         private factura: FacturaData
     ){}
 
-    async solicitarViaje(pasajeroId: number, ubicacionDestino: string, metodoPago: string){
+    async solicitarViaje(pasajeroId: number, ubicacionDestino: string, metodoPago: string, conductorCercano: Conductor){
         try{
             const pasajero = await this.prisma.pasajero.findUnique({where: {ID: pasajeroId}});
-            const conductorCercano: Conductor = (await this.distancia.obtenerConductoresDisponiblesCercanos(pasajero.Ubicacion, 1))[0];
-            console.log(conductorCercano)
-            if (conductorCercano == null){
-                throw new HttpException('No hay conductores disponibles.', HttpStatus.BAD_REQUEST);
-            }
 
             const viaje = this.obtenerDatosViaje(pasajero, conductorCercano, ubicacionDestino, metodoPago);
             
@@ -68,9 +63,9 @@ export class ViajeData {
         }
     }
 
-    async ObtenerMuchos(where?: Object){
+    async obtenerTodos(){
         try{
-            return await this.prisma.viaje.findMany({where: where});
+            return await this.prisma.viaje.findMany();
         }
         catch(error){
             this.validar.manejarError(error.toString());
@@ -78,7 +73,27 @@ export class ViajeData {
         }
     }
 
-    async ObtenerUno(where: Object){
+    async obtenerPorId(id: number){
+        try{
+            return await this.prisma.viaje.findFirst({where: {ID: id}});
+        }
+        catch (error){
+            this.validar.manejarError(error.toString());
+            throw new HttpException(`Error no manejado: ${error}`, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async obtenerViajesActivos(){
+        try{
+            return await this.prisma.viaje.findMany({where: {Activo: true}});
+        }
+        catch (error){
+            this.validar.manejarError(error.toString());
+            throw new HttpException(`Error no manejado: ${error}`, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async obtenerUno(where?: Object){
         try{
             return await this.prisma.viaje.findFirst({where: where});
         }

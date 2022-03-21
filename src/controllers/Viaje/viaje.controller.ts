@@ -1,42 +1,46 @@
-import { Body, Controller, Get, Post, Put, Delete, Param } from "@nestjs/common";
+import { Body, Controller, Get, Post, Put, Delete, Param, ParseIntPipe } from "@nestjs/common";
 import { ViajeService } from "../../services/Viaje/viaje.service";
 
-@Controller('api/viaje')
+@Controller('api/viajes')
 export class ViajeController {
     constructor(private service: ViajeService){}
     
-    @Post('SolicitarViaje')
+    @Post('solicitar')
     async SolicitarViaje(@Body() body){
         return await this.service.solicitarViaje(body);
     }
 
-    @Post('CompletarViaje')
+    @Post('completar')
     async CompletarViaje(@Body() body){
         return await this.service.completarViaje(body);
     }
 
-    @Get('ObtenerMuchos')
-    async ObtenerMuchos(@Body() body){
-        return await this.service.ObtenerMuchos(body);
+    @Get('activos')
+    async ObtenerViajesActivos(){
+        return await this.service.obtenerViajesActivos();
     }
 
-    @Get('ObtenerUno')
-    async ObtenerUno(@Body() body){
-        return await this.service.ObtenerUno(body);
+    @Get()
+    async ObtenerTodos(){
+        return await this.service.obtenerTodos();
     }
 
-    @Post('Agregar')
+    @Get('/:id')
+    async ObtenerPorId(@Param('id', ParseIntPipe) id: number){
+        return await this.service.obtenerPorId(id);
+    }
+
+    @Post('agregar')
     async Agregar(@Body() body){
         return await this.service.agregar(body);
-
     }
 
-    @Put('Actualizar')
+    @Put('actualizar')
     async Actualizar(@Body() body){
         return await this.service.actualizar(body);
     }
 
-    @Delete('Eliminar')
+    @Delete('eliminar')
     async Eliminar(@Body() body){
         return await this.service.eliminar(body);
     }

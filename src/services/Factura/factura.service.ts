@@ -7,12 +7,9 @@ import { ValidationService } from "../Validation/validation.service";
 export class FacturaService {
     constructor(private data: FacturaData, private validar: ValidationService){}
 
-    async obtenerMuchos(where?: Object){
-        
+    async obtenerTodos(){   
         try {
-            this.validar.arrayVacioNulo(Object.values(where));
-
-            const data = await this.data.obtenerMuchos(where);
+            const data = await this.data.obtenerTodos();
 
             this.validar.sinDatosArray(data);
 
@@ -23,13 +20,11 @@ export class FacturaService {
         }
     }
 
-    async obtenerUno(where: Object){
-        
+    async obtenerPorId(id: number){  
         try {
-            this.validar.cuerpoVacio(where);
-            this.validar.arrayVacioNulo(Object.values(where));
-
-            const data = await this.data.obtenerUno(where);
+            this.validar.idInvalido(id);
+            
+            const data = await this.data.obtenerPorId(id);
 
             this.validar.sinDatos(data);
 
@@ -41,7 +36,6 @@ export class FacturaService {
     }
 
     async agregar(factura: Factura){
-
         try {
             this.validar.cuerpoVacio(factura);
             this.validar.arrayVacioNulo(Object.values(factura));
@@ -54,7 +48,6 @@ export class FacturaService {
     }
 
     async actualizar(body: any){
-
         try {
             this.validar.cuerpoVacio(body);
             this.validar.propiedadesIncorrectas(body, ['where', 'factura'])
@@ -67,7 +60,6 @@ export class FacturaService {
             throw error;
         }
     }
-
     async eliminar(where: Object){
 
         try {

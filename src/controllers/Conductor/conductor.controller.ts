@@ -1,36 +1,41 @@
-import { Body, Controller, Get, Post, Put, Delete } from "@nestjs/common";
+import { Body, Controller, Get, Post, Put, Delete, Param, ParseIntPipe } from "@nestjs/common";
 import { ConductorService } from "../../services/Conductor/conductor.service";
 
-@Controller('api/conductor')
+@Controller('api/conductores')
 export class ConductorController  {
     constructor(private service: ConductorService){}
 
-    @Get('ObtenerConductoresCercanos')
+    @Get('disponibles-cercanos')
     async ObtenerConductoresCercanos(@Body() body){
         return await this.service.obtenerConductoresDisponiblesCercanos(body);
     }
 
-    @Get('ObtenerMuchos')
-    async ObtenerMuchos(@Body() body){
-        return await this.service.obtenerMuchos(body);
+    @Get('disponibles')
+    async ObtenerConductoresDisponibles(){
+        return await this.service.obtenerConductoresDisponibles();
     }
 
-    @Get('ObtenerUno')
-    async ObtenerUno(@Body() body){
-        return await this.service.obtenerUno(body);
+    @Get()
+    async ObtenerTodos(){
+        return await this.service.obtenerTodos();
     }
 
-    @Post('Agregar')
+    @Get(':id')
+    async ObtenerPorId(@Param('id', ParseIntPipe) id: number){
+        return await this.service.obtenerPorId(id);
+    }
+
+    @Post('agregar')
     async Agregar(@Body() body){
         return await this.service.agregar(body);
     }
 
-    @Put('Actualizar')
+    @Put('actualizar')
     async Actualizar(@Body() body){
         return await this.service.actualizar(body);
     }
 
-    @Delete('Eliminar')
+    @Delete('eliminar')
     async Eliminar(@Body() body){
         return await this.service.eliminar(body);
     }

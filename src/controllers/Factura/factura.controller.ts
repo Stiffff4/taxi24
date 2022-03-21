@@ -1,31 +1,31 @@
-import { Body, Controller, Get, Post, Put, Delete } from "@nestjs/common";
+import { Body, Controller, Get, Post, Put, Delete, Param, ParseIntPipe } from "@nestjs/common";
 import { FacturaService } from "../../services/Factura/factura.service"; 
 
-@Controller('api/factura')
+@Controller('api/facturas')
 export class FacturaController  {
     constructor(private service: FacturaService){}
 
-    @Get('ObtenerMuchos')
-    async ObtenerMuchos(@Body() body){
-        return await this.service.obtenerMuchos(body);
+    @Get()
+    async ObtenerTodos(){
+        return await this.service.obtenerTodos();
     }
 
-    @Get('ObtenerUno')
-    async ObtenerUno(@Body() body){
-        return await this.service.obtenerUno(body);
+    @Get('/:id')
+    async ObtenerPorId(@Param('id', ParseIntPipe) id: number){
+        return await this.service.obtenerPorId(id);
     }
 
-    @Post('Agregar')
+    @Post('agregar')
     async Agregar(@Body() body){
         return await this.service.agregar(body);
     }
 
-    @Put('Actualizar')
+    @Put('actualizar')
     async Actualizar(@Body() body){
         return await this.service.actualizar(body);
     }
 
-    @Delete('Eliminar')
+    @Delete('eliminar')
     async Eliminar(@Body() body){
         return await this.service.eliminar(body);
     }

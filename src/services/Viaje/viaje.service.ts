@@ -1,22 +1,34 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { Pasajero, Viaje } from "@prisma/client";
+import { Conductor, Pasajero, Viaje } from "@prisma/client";
 import { PasajeroData } from "../../database/DataAccess/Pasajero/pasajero.data";
 import { ViajeData } from "../../database/DataAccess/Viaje/viaje.data";
+import { DistanceData } from "../Distance/distance.data";
 import { ValidationService } from "../Validation/validation.service";
 
 @Injectable()
 export class ViajeService {
-    constructor(private data: ViajeData, private validar: ValidationService, private dataPasajero: PasajeroData){}
+    constructor(
+        private data: ViajeData, 
+        private validar: ValidationService, 
+        private dataPasajero: PasajeroData,
+        private distancia: DistanceData
+    ){}
 
     async solicitarViaje(body: any){
         try {
             this.validar.arrayVacioNulo(Object.values(body));
             this.validar.propiedadesIncorrectas(body, ['pasajero', 'ubicacionDestino', 'metodoPago']);
 
-            const viaje: Viaje = await this.data.ObtenerUno(
+            const viaje: Viaje = await this.data.obtenerUno(
                 {"IDPasajero": body.pasajero, "Activo": true},
             );
-            const pasajero: Pasajero = await this.dataPasajero.obtenerUno({"ID": body.pasajero});
+            const pasajero: Pasajero = await this.dataPasajero.obtenerPorId(body.pasajero);
+
+            const conductorCercano: Conductor = (await this.distancia.obtenerConductoresDisponiblesCercanos(pasajero.Ubicacion, 1))[0];
+
+            if (conductorCercano == null){
+                throw new HttpException('No hay conductores disponibles.', HttpStatus.BAD_REQUEST);
+            }
 
             if (viaje){
                 if (viaje.Activo){
@@ -30,7 +42,7 @@ export class ViajeService {
 
             this.validar.ubicacion(body.ubicacionDestino);
 
-            return this.data.solicitarViaje(body.pasajero, body.ubicacionDestino, body.metodoPago);
+            return this.data.solicitarViaje(body.pasajero, body.ubicacionDestino, body.metodoPago, conductorCercano);
         } 
         catch (error) {
             throw error;
@@ -46,7 +58,7 @@ export class ViajeService {
                 throw new HttpException('El ID no puede ser nulo', HttpStatus.BAD_REQUEST);
             }
 
-            const viaje: Viaje = await this.data.ObtenerUno({"ID": body.ID});
+            const viaje: Viaje = await this.data.obtenerPorId(body.ID);
                         
             if (!viaje){
                 throw new HttpException('El viaje no existe', HttpStatus.BAD_REQUEST); 
@@ -63,12 +75,9 @@ export class ViajeService {
         }
     }
 
-    async ObtenerMuchos(where?: Object){
-        
+    async obtenerTodos(){   
         try {
-            this.validar.arrayVacioNulo(Object.values(where));
-
-            const data = await this.data.ObtenerMuchos(where);
+            const data = await this.data.obtenerTodos();
 
             this.validar.sinDatosArray(data);
 
@@ -79,13 +88,24 @@ export class ViajeService {
         }
     }
 
-    async ObtenerUno(where: Object){
-        
+    async obtenerPorId(id: number){
         try {
-            this.validar.cuerpoVacio(where);
-            this.validar.arrayVacioNulo(Object.values(where));
+            this.validar.idInvalido(id);
+            
+            const data = await this.data.obtenerPorId(id);
 
-            const data = await this.data.ObtenerUno(where);
+            this.validar.sinDatos(data);
+
+            return data;
+        }
+        catch(error){
+            throw error;
+        }
+    }
+
+    async obtenerViajesActivos(){
+        try {        
+            const data = await this.data.obtenerViajesActivos();
 
             this.validar.sinDatos(data);
 
@@ -97,7 +117,6 @@ export class ViajeService {
     }
 
     async agregar(viaje: Viaje){
-
         try {
             this.validar.cuerpoVacio(viaje);
             this.validar.arrayVacioNulo(Object.values(viaje));
@@ -110,7 +129,6 @@ export class ViajeService {
     }
 
     async actualizar(body: any){
-
         try {
             this.validar.cuerpoVacio(body);
             this.validar.propiedadesIncorrectas(body, ['where', 'viaje'])
@@ -125,7 +143,6 @@ export class ViajeService {
     }
 
     async eliminar(where: Object){
-
         try {
             this.validar.cuerpoVacio(where);
             this.validar.arrayVacioNulo(Object.values(where));

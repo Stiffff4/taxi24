@@ -1,36 +1,36 @@
-import { Body, Controller, Get, Post, Put, Delete } from "@nestjs/common";
+import { Body, Controller, Get, Post, Put, Delete, ParseIntPipe, Param } from "@nestjs/common";
 import { PasajeroService } from "../../services/Pasajero/pasajero.service";
 
-@Controller('api/pasajero')
+@Controller('api/pasajeros')
 export class PasajeroController {
     constructor(private service: PasajeroService){}
 
-    @Get('ObtenerConductoresCercanos')
+    @Get('conductores-cercanos')
     async GetAvailableDrivers(@Body() body){
         return await this.service.obtenerConductoresDisponiblesCercanos(body);
     }
 
-    @Get('ObtenerMuchos')
-    async ObtenerMuchos(@Body() body){
-        return await this.service.obtenerMuchos(body);
+    @Get()
+    async ObtenerTodos(){
+        return await this.service.obtenerTodos();
     }
 
-    @Get('ObtenerUno')
-    async ObtenerUno(@Body() body){
-        return await this.service.obtenerUno(body);
+    @Get('/:id')
+    async ObtenerPorId(@Param('id', ParseIntPipe) id: number){
+        return await this.service.obtenerPorId(id);
     }
 
-    @Post('Agregar')
+    @Post('agregar')
     async Agregar(@Body() body){
         return await this.service.agregar(body);
     }
 
-    @Put('Actualizar')
+    @Put('actualizar')
     async Actualizar(@Body() body){
         return await this.service.actualizar(body);
     }
 
-    @Delete('Eliminar')
+    @Delete('eliminar')
     async Eliminar(@Body() body){
         return await this.service.eliminar(body);
     }

@@ -2,14 +2,14 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { Pasajero } from "@prisma/client";
 import { PrismaData } from "../../prisma/prisma.data"; 
 import { ValidationService } from "../../../services/Validation/validation.service";
-import { DistanceService } from "../../../services/Distance/distance.service";
+import { DistanceData } from "../../../services/Distance/distance.data";
 
 @Injectable()
 export class PasajeroData {
     constructor(
         private prisma: PrismaData, 
         private validar: ValidationService,
-        private distancia: DistanceService
+        private distancia: DistanceData
     ){}
 
     async obtenerConductoresDisponiblesCercanos(ubicacion: string){
@@ -22,9 +22,9 @@ export class PasajeroData {
         }
     }
 
-    async obtenerMuchos(where?: Object){
+    async obtenerTodos(){
         try{
-            return await this.prisma.pasajero.findMany({where: where});
+            return await this.prisma.pasajero.findMany();
         }
         catch(error){
             this.validar.manejarError(error.toString());
@@ -32,9 +32,9 @@ export class PasajeroData {
         }
     }
 
-    async obtenerUno(where: Object){
+    async obtenerPorId(id: number){
         try{
-            return await this.prisma.pasajero.findFirst({where: where});
+            return await this.prisma.pasajero.findFirst({where: {ID: id}});
         }
         catch (error){
             this.validar.manejarError(error.toString());

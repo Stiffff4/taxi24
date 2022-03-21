@@ -21,9 +21,9 @@ export class FacturaData {
         return this.GenerarFacturaDeViaje(pasajero, conductor, viaje, precioFinal);
     }
 
-    async obtenerMuchos(where?: Object){
+    async obtenerTodos(){
         try{
-            return await this.prisma.factura.findMany({where: where});
+            return await this.prisma.factura.findMany();
         }
         catch(error){
             this.validator.manejarError(error.toString());
@@ -31,9 +31,9 @@ export class FacturaData {
         }
     }
 
-    async obtenerUno(where: Object){
+    async obtenerPorId(id: number){
         try{
-            return await this.prisma.factura.findFirst({where: where});
+            return await this.prisma.factura.findFirst({where: {ID: id}});
         }
         catch (error){
             this.validator.manejarError(error.toString());

@@ -3,7 +3,7 @@ import { Conductor } from "@prisma/client";
 import { PrismaData } from "../../database/prisma/prisma.data";
 
 @Injectable()
-export class DistanceService{
+export class DistanceData{
 
     constructor(private prisma: PrismaData){}
     

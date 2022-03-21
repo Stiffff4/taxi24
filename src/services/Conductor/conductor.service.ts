@@ -24,11 +24,9 @@ export class ConductorService {
         }
     }
 
-    async obtenerMuchos(where?: Object){   
+    async obtenerTodos(){   
         try {
-            this.validar.arrayVacioNulo(Object.values(where));
-
-            const data = await this.data.obtenerMuchos(where);
+            const data = await this.data.obtenerTodos();
 
             this.validar.sinDatosArray(data);
 
@@ -39,12 +37,24 @@ export class ConductorService {
         }
     }
 
-    async obtenerUno(where: Object){
+    async obtenerPorId(id: number){
         try {
-            this.validar.cuerpoVacio(where);
-            this.validar.arrayVacioNulo(Object.values(where));
+            this.validar.idInvalido(id);
 
-            const data = await this.data.obtenerUno(where);
+            const data = await this.data.obtenerPorId(id);
+
+            this.validar.sinDatos(data);
+
+            return data;
+        }
+        catch(error){
+            throw error;
+        }
+    }
+
+    async obtenerConductoresDisponibles(){
+        try {
+            const data = await this.data.obtenerConductoresDisponibles();
 
             this.validar.sinDatos(data);
 

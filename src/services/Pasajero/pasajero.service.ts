@@ -24,11 +24,9 @@ export class PasajeroService {
         }
     }
 
-    async obtenerMuchos(where?: Object){    
+    async obtenerTodos(){    
         try {
-            this.validar.arrayVacioNulo(Object.values(where));
-
-            const data = await this.data.obtenerMuchos(where);
+            const data = await this.data.obtenerTodos();
 
             this.validar.sinDatosArray(data);
 
@@ -39,12 +37,11 @@ export class PasajeroService {
         }
     }
 
-    async obtenerUno(where: Object){    
+    async obtenerPorId(id: number){    
         try {
-            this.validar.cuerpoVacio(where);
-            this.validar.arrayVacioNulo(Object.values(where));
-
-            const datos = await this.data.obtenerUno(where);
+            this.validar.idInvalido(id);
+            
+            const datos = await this.data.obtenerPorId(id);
 
             this.validar.sinDatos(datos);
 

@@ -54,6 +54,12 @@ export class ValidationService {
         }
     }
 
+    idInvalido = (id: number) => {
+        if (id < 1 || !id){
+            throw new HttpException('El ID no es válido.', HttpStatus.BAD_REQUEST);
+        }
+    }
+
     arrayVacioNulo = (values: any[]) => {
         values.forEach(element => {
             if (element == "" || element == null || element == undefined || element == " ")

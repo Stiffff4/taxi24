@@ -90,25 +90,19 @@ Podemos ejecutar el proyecto con el comando ```npm run start:dev```
 ### Conductores
 - **Obtener una lista de todos los conductores**
 
-Endpoint: ```api/conductor/ObtenerMuchos``` - ```GET```
+Endpoint: ```api/conductores``` - ```GET```
 
-*No es necesario enviar datos en el cuerpo de la solicitud si se quieren obtener todos los registros de una tabla.*
+
 
 - **Obtener una lista de todos los conductores disponibles**
 
 
-Endpoint: ```api/conductor/ObtenerMuchos``` - ```GET```
-
-```json
-{
-    "Disponible": true
-}
-```
+Endpoint: ```api/conductores/disponibles``` - ```GET```
 
 - **Obtener una lista de todos los conductores disponibles en un radio de 3 km para una ubicación específica.**
 
 
-Endpoint: ```api/conductor/ObtenerConductoresCercanos``` - ```GET```
+Endpoint: ```api/conductores/disponibles-cercanos``` - ```GET```
 
 ```json
 {
@@ -116,24 +110,20 @@ Endpoint: ```api/conductor/ObtenerConductoresCercanos``` - ```GET```
 }
 ```
 
+**Nota:** La ubicación debe ser un ```string``` conteniendo la latitud y longitud separadas por una coma ```,``` 
+
 *Debe ser "ubicacion" en minúsculas.*
 
 - **Obtener un conductor específico por ID.**
 
 
-Endpoint: ```api/conductor/ObtenerUno``` - ```GET```
-
-```json
-{
-    "ID": 1
-}
-```
+Endpoint: ```api/conductores/{id}``` - ```GET```
 
 ### Viajes
 - **Crear una nueva solicitud de "Viaje" asignando un conductor a un piloto.**
 
 
-Endpoint: ```api/viaje/SolicitarViaje``` - ```POST```
+Endpoint: ```api/viajes/solicitar``` - ```POST```
 
 ```json
 {
@@ -150,7 +140,7 @@ Endpoint: ```api/viaje/SolicitarViaje``` - ```POST```
 - **Completar un viaje.**
 
 
-Endpoint: ```api/viaje/CompletarViaje``` - ```POST```
+Endpoint: ```api/viajes/completar``` - ```POST```
 
 ```json
 {
@@ -166,32 +156,21 @@ Si no se quiere dar una ```Valoracion```, se envia ```null```.
 - **Obtenga una lista de todos los viajes activos.**
 
 
-Endpoint: ```api/viaje/ObtenerMuchos``` - ```GET```
-
-```json 
-{
-    "Activo": true
-}
-```
+Endpoint: ```api/viajes/activos``` - ```GET```
 
 ### Pasajeros
 - Obtenga una lista de todos los pasajeros.
 
-Endpoint: ```api/pasajero/ObtenerMuchos``` - ```GET```
+Endpoint: ```api/pasajeros``` - ```GET```
 
 - Obtener un pasajero específico por su ID.
 
-Endpoint: ```api/pasajero/ObtenerUno``` - ```GET```
+Endpoint: ```api/pasajeros/{id}``` - ```GET```
 
-```json
-{
-    "ID": 1
-}
-```
 
 - Para un pasajero solicitando un viaje, obtenga una lista de los 3 conductores más cercanos al punto de partida.
 
-Endpoint: ```api/pasajero/ObtenerConductoresCercanos``` - ```GET```
+Endpoint: ```api/pasajeros/obtener-conductores-cercanos``` - ```GET```
 
 ```json 
 {
@@ -204,37 +183,14 @@ Endpoint: ```api/pasajero/ObtenerConductoresCercanos``` - ```GET```
 
 #### GET 
 
-- ```ObtenerMuchos``` 
-- ```ObtenerUno```
+- ```Obtener todos``` 
+- ```Obtener por ID```
 
-Enviando una solicitud a los siguientes endpoints, podemos obtener uno o muchos registros.
+Enviando una solicitud a los siguientes endpoints, podemos obtener uno (por id) o muchos registros.
 
-```api/{controlador}/ObtenerMuchos``` - ```GET```
+```api/{controlador}``` - ```GET```
 
-```api/{controlador}/ObtenerUno``` - ```GET```
-
-Para filtrar, solamente debemos pasarle la condición en el cuerpo de la solicitud.
-
-```json
-"ID": 1
-```
-
-**Nota: La propiedad es case sensitive, se debe asegurar que la propiedad existe y esté bien escrita.**
-
-**"ID" no es lo mismo que "id".**
-
-Ejemplo:
-Si quisieramos obtener todos los **conductores disponibles**, la solicitud se vería de la siguiente manera:
-
-Endpoint: ```api/conductor/ObtenerMuchos``` - ```GET```
-
-```json 
-{
-    "Disponible": true
-}
-```
-
-**Nota:** El filtro es **obligatorio** para ```ObtenerUno```, pero para ```ObtenerMuchos``` es opcional.
+```api/{controlador}/{id}``` - ```GET```
 
 #### POST
 
@@ -242,13 +198,13 @@ Endpoint: ```api/conductor/ObtenerMuchos``` - ```GET```
 
 Enviando una solicitud al siguiente endpoint, podemos agregar un registro.
 
-```api/{controlador}/Agregar``` - ```POST```
+```api/{controlador}/agregar``` - ```POST```
 
 Todas las propiedades deben estar presentes en el objeto, dentro del cuerpo de la solicitud.
 
 Ejemplo: Si agregaremos un nuevo **pasajero**:
 
-Endpoint: ```api/pasajero/Agregar``` - ```POST```
+Endpoint: ```api/pasajeros/agregar``` - ```POST```
 
 ```json
 {
@@ -262,15 +218,13 @@ Endpoint: ```api/pasajero/Agregar``` - ```POST```
 
 **No debe faltar ninguna.**
 
-**Nota:** La ubicación debe ser un ```string``` conteniendo la latitud y longitud separadas por una coma ```,```
-
 #### PUT
 
 - ```Actualizar```
 
 Enviando una solicitud al siguiente endpoint, podemos actualizar un registro.
 
-```api/{controlador}/Actualizar``` - ```PUT```
+```api/{controlador}/actualizar``` - ```PUT```
 
 En el cuerpo de la solicitud, deben haber 2 objetos:
 
@@ -287,7 +241,7 @@ En el cuerpo de la solicitud, deben haber 2 objetos:
 
 Ejemplo: Si queremos actualizar un **vehiculo** existente:
 
-Endpoint: ```api/vehiculo/Actualizar``` - ```PUT```
+Endpoint: ```api/vehiculos/actualizar``` - ```PUT```
 
 
 ```json
@@ -308,17 +262,4 @@ Endpoint: ```api/vehiculo/Actualizar``` - ```PUT```
 
 Enviando una solicitud al siguiente endpoint, podemos eliminar un registro.
 
-```api/{controlador}/Eliminar``` - ```DELETE```
-
-Al igual que en ```ObtenerUno```, se debe enviar un filtro **obligatorio** para eliminar un registro.
-
-Ejemplo: Si queremos eliminar un **viaje** completado"
-
-Endpoint: ```api/viaje/Eliminar``` - ```DELETE```
-
-```json
-{
-    "ID": 2,
-    "Completado": true
-}
-```
+```api/{controlador}/eliminar/{id}``` - ```DELETE```
