@@ -196,7 +196,7 @@ Endpoint: ```api/pasajeros/{id}``` - ```GET```
 
 - Para un pasajero solicitando un viaje, obtenga una lista de los 3 conductores más cercanos al punto de partida.
 
-Endpoint: ```api/pasajeros/obtener-conductores-cercanos``` - ```GET```
+Endpoint: ```api/pasajeros/conductores-cercanos``` - ```GET```
 
 ```json 
 {
