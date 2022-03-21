@@ -1,3 +1,23 @@
+- [Proyecto de evaluación "Taxi24"](#proyecto-de-evaluaci-n--taxi24-)
+  * [Tecnologías utilizadas](#tecnolog-as-utilizadas)
+  * [Instrucciones de instalación](#instrucciones-de-instalaci-n)
+    + [Software imprescindible](#software-imprescindible-)
+    + [Dependencias](#dependencias)
+    + [Crear la base de datos y ejecutar las migraciones](#crear-la-base-de-datos-y-ejecutar-las-migraciones)
+  * [Ejecucion](#ejecucion)
+  * [Instrucciones de utilización](#instrucciones-de-utilizaci-n)
+    + [Modelos y sus campos](#modelos-y-sus-campos)
+    + [Controladores](#controladores)
+  * [Endpoints funcionalidades principales](#endpoints-funcionalidades-principales)
+    + [Conductores](#conductores)
+    + [Viajes](#viajes)
+    + [Pasajeros](#pasajeros)
+  * [Endpoints CRUD](#endpoints-crud)
+      - [GET](#get)
+      - [POST](#post)
+      - [PUT](#put)
+      - [DELETE](#delete)
+
 # Proyecto de evaluación "Taxi24"
 
 
@@ -10,7 +30,7 @@ Taxi24 es una compañía de taxis que necesita la construcción y diseño de API
 
 ## Instrucciones de instalación
 
-### Software imprescindible:
+### Software imprescindible
 - Descargar e instalar [Docker](https://www.docker.com/get-started), este será nuestro motor de base de datos.
 
 ### Dependencias
@@ -148,18 +168,15 @@ Endpoint: ```api/viajes/solicitar``` - ```POST```
 - **Completar un viaje.**
 
 
-Endpoint: ```api/viajes/completar``` - ```POST```
+Endpoint: ```api/viajes/completar/{idViaje}``` - ```POST```
 
 ```json
 {
-    "ID": 9,
     "Valoracion": 3
 }
 ```
 
-```ID``` es el ID del viaje.
-
-Si no se quiere dar una ```Valoracion```, se envia ```null```.
+Si no se quiere dar una ```Valoracion```, se envia ```null``` o ```0```.
 
 - **Obtenga una lista de todos los viajes activos.**
 
@@ -206,13 +223,13 @@ Enviando una solicitud a los siguientes endpoints, podemos obtener uno (por id) 
 
 Enviando una solicitud al siguiente endpoint, podemos agregar un registro.
 
-```api/{controlador}/agregar``` - ```POST```
+```api/{controlador}``` - ```POST```
 
 Todas las propiedades deben estar presentes en el objeto, dentro del cuerpo de la solicitud.
 
 Ejemplo: Si agregaremos un nuevo **pasajero**:
 
-Endpoint: ```api/pasajeros/agregar``` - ```POST```
+Endpoint: ```api/pasajeros``` - ```POST```
 
 ```json
 {
@@ -232,34 +249,16 @@ Endpoint: ```api/pasajeros/agregar``` - ```POST```
 
 Enviando una solicitud al siguiente endpoint, podemos actualizar un registro.
 
-```api/{controlador}/actualizar``` - ```PUT```
-
-En el cuerpo de la solicitud, deben haber 2 objetos:
-
-```json
-{
-    "where": {
-        "Propiedad": "valor"
-    },
-    "modelo": {
-        "Propiedad": "valor"
-    }
-}
-```
+```api/{controlador}/{id}``` - ```PUT```
 
 Ejemplo: Si queremos actualizar un **vehiculo** existente:
 
-Endpoint: ```api/vehiculos/actualizar``` - ```PUT```
+Endpoint: ```api/vehiculos/{id}``` - ```PUT```
 
 
 ```json
 {
-    "where": {
-        "ID": 2
-    },
-    "vehiculo": {
-        "Color": "Verde"
-    }
+    "Color": "Verde"
 }
 ```
 
@@ -270,4 +269,4 @@ Endpoint: ```api/vehiculos/actualizar``` - ```PUT```
 
 Enviando una solicitud al siguiente endpoint, podemos eliminar un registro.
 
-```api/{controlador}/eliminar/{id}``` - ```DELETE```
+```api/{controlador}/{id}``` - ```DELETE```

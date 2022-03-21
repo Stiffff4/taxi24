@@ -62,6 +62,7 @@ export class ValidationService {
 
     arrayVacioNulo = (values: any[]) => {
         values.forEach(element => {
+            if (element == 0) return;
             if (element == "" || element == null || element == undefined || element == " ")
                 throw new HttpException('No puede haber campos vacios.', HttpStatus.BAD_REQUEST);
         });

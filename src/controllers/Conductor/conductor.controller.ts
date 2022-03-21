@@ -12,6 +12,7 @@ export class ConductorController  {
 
     @Get('disponibles')
     async ObtenerConductoresDisponibles(){
+        console.log('aqui')
         return await this.service.obtenerConductoresDisponibles();
     }
 
@@ -25,18 +26,18 @@ export class ConductorController  {
         return await this.service.obtenerPorId(id);
     }
 
-    @Post('agregar')
+    @Post()
     async Agregar(@Body() body){
         return await this.service.agregar(body);
     }
 
-    @Put('actualizar')
-    async Actualizar(@Body() body){
-        return await this.service.actualizar(body);
+    @Put(':id')
+    async Actualizar(@Body() body, @Param('id', ParseIntPipe) id: number){
+        return await this.service.actualizar(body, id);
     }
 
-    @Delete('eliminar')
-    async Eliminar(@Body() body){
-        return await this.service.eliminar(body);
+    @Delete(':id')
+    async Eliminar(@Param('id', ParseIntPipe) id: number){
+        return await this.service.eliminar(id);
     }
 }

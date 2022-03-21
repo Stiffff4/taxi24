@@ -52,10 +52,10 @@ export class PasajeroData {
         }
     }
 
-    async actualizar(pasajero: Pasajero, where: Object){
+    async actualizar(pasajero: Pasajero, id: number){
         try {
             return await this.prisma.pasajero.update({
-                where: where,
+                where: {ID: id},
                 data: pasajero
             });
             
@@ -66,10 +66,10 @@ export class PasajeroData {
         }
     }
 
-    async eliminar(where: Object){
+    async eliminar(id: number){
         try{
             return await this.prisma.pasajero.delete({
-                where: where
+                where: {ID: id}
             });
         }
         catch(error){

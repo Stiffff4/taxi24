@@ -65,26 +65,24 @@ export class PasajeroService {
         }
     }
 
-    async actualizar(body: any){
+    async actualizar(body: any, id: number){
         try {
             this.validar.cuerpoVacio(body);
-            this.validar.propiedadesIncorrectas(body, ['where', 'conductor'])
-            this.validar.arrayVacioNulo(Object.values(body.where));
-            this.validar.arrayVacioNulo(Object.values(body.pasajero));
+            this.validar.arrayVacioNulo(Object.values(body));
+            this.validar.idInvalido(id);
 
-            return await this.data.actualizar(body.pasajero, body.where);
+            return await this.data.actualizar(body, id);
         } 
         catch (error) {
             throw error;
         }
     }
 
-    async eliminar(where: Object){
+    async eliminar(id: number){
         try {
-            this.validar.cuerpoVacio(where);
-            this.validar.arrayVacioNulo(Object.values(where));
+            this.validar.idInvalido(id);
 
-            return await this.data.eliminar(where);
+            return await this.data.eliminar(id);
         } 
         catch (error) {
             throw error;

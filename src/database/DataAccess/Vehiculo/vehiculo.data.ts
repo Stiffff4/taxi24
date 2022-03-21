@@ -41,10 +41,10 @@ export class VehiculoData {
         }
     }
 
-    async actualizar(where: Object, vehiculo: Vehiculo){
+    async actualizar(vehiculo: Vehiculo, id: number){
         try {
             return await this.prisma.vehiculo.update({
-                where: where,
+                where: {ID: id},
                 data: vehiculo
             });
         } 
@@ -54,9 +54,11 @@ export class VehiculoData {
         }
     }
 
-    async eliminar(where: Object){
+    async eliminar(id: number){
         try{
-            return await this.prisma.vehiculo.delete({where: where});
+            return await this.prisma.vehiculo.delete({
+                where: {ID: id}
+            });
         }
         catch(error){
             this.validator.manejarError(error.toString());

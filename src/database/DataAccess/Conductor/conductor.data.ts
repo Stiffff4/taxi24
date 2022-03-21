@@ -63,10 +63,10 @@ export class ConductorData {
         }
     }
 
-    async actualizar(conductor: Conductor, where: Object){
+    async actualizar(conductor: Conductor, id: number){
         try {
             return await this.prisma.conductor.update({
-                where: where,
+                where: {ID: id},
                 data: conductor
             });
             
@@ -77,10 +77,10 @@ export class ConductorData {
         }
     }
 
-    async eliminar(where: Object){
+    async eliminar(id: number){
         try{
             return await this.prisma.conductor.delete({
-                where: where
+                where: {ID: id}
             });
         }
         catch(error){

@@ -10,9 +10,9 @@ export class ViajeController {
         return await this.service.solicitarViaje(body);
     }
 
-    @Post('completar')
-    async CompletarViaje(@Body() body){
-        return await this.service.completarViaje(body);
+    @Post('completar/:id')
+    async CompletarViaje(@Param('id', ParseIntPipe) id: number, @Body() body){
+        return await this.service.completarViaje(id, body);
     }
 
     @Get('activos')
@@ -30,18 +30,18 @@ export class ViajeController {
         return await this.service.obtenerPorId(id);
     }
 
-    @Post('agregar')
+    @Post()
     async Agregar(@Body() body){
         return await this.service.agregar(body);
     }
 
-    @Put('actualizar')
-    async Actualizar(@Body() body){
-        return await this.service.actualizar(body);
+    @Put(':id')
+    async Actualizar(@Body() body, @Param('id', ParseIntPipe) id: number){
+        return await this.service.actualizar(body, id);
     }
 
-    @Delete('eliminar')
-    async Eliminar(@Body() body){
-        return await this.service.eliminar(body);
+    @Delete(':id')
+    async Eliminar(@Param('id', ParseIntPipe) id: number){
+        return await this.service.eliminar(id);
     }
 }

@@ -49,16 +49,15 @@ export class ViajeService {
         }
     }
 
-    async completarViaje(body: any){
+    async completarViaje(id: number, body: any){
         try {
             this.validar.cuerpoVacio(body);
-            this.validar.propiedadesIncorrectas(body, ['ID', 'Valoracion']);
+            this.validar.propiedadesIncorrectas(body, ['Valoracion']);
+            this.validar.idInvalido(id);
 
-            if (!body.ID || body.ID < 1){
-                throw new HttpException('El ID no puede ser nulo', HttpStatus.BAD_REQUEST);
-            }
+            if (body.Valoracion < 0 || body.Valoracion > 5) throw new HttpException('Valoración inválida', HttpStatus.BAD_REQUEST)
 
-            const viaje: Viaje = await this.data.obtenerPorId(body.ID);
+            const viaje: Viaje = await this.data.obtenerPorId(id);
                         
             if (!viaje){
                 throw new HttpException('El viaje no existe', HttpStatus.BAD_REQUEST); 
@@ -68,7 +67,7 @@ export class ViajeService {
                 throw new HttpException('El viaje ya ha sido completado', HttpStatus.BAD_REQUEST); 
             }
 
-            return this.data.completarViaje(body.ID, body.Valoracion);
+            return this.data.completarViaje(id, body.Valoracion);
         } 
         catch (error) {
             throw error;
@@ -107,7 +106,7 @@ export class ViajeService {
         try {        
             const data = await this.data.obtenerViajesActivos();
 
-            this.validar.sinDatos(data);
+            this.validar.sinDatosArray(data);
 
             return data;
         }
@@ -128,26 +127,23 @@ export class ViajeService {
         }
     }
 
-    async actualizar(body: any){
+    async actualizar(body: any, id: number){
         try {
             this.validar.cuerpoVacio(body);
-            this.validar.propiedadesIncorrectas(body, ['where', 'viaje'])
-            this.validar.arrayVacioNulo(Object.values(body.where));
-            this.validar.arrayVacioNulo(Object.values(body.viaje));
+            this.validar.arrayVacioNulo(Object.values(body));
+            this.validar.idInvalido(id);
 
-            return await this.data.actualizar(body.viaje, body.viaje);
+            return await this.data.actualizar(body, id);
         } 
         catch (error) {
             throw error;
         }
     }
-
-    async eliminar(where: Object){
+    async eliminar(id: number){
         try {
-            this.validar.cuerpoVacio(where);
-            this.validar.arrayVacioNulo(Object.values(where));
+            this.validar.idInvalido(id);
 
-            return await this.data.eliminar(where);
+            return await this.data.eliminar(id);
         } 
         catch (error) {
             throw error;

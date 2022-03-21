@@ -42,7 +42,7 @@ INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "Ubi
 VALUES ('Camila', 'Almanzar', 24, 0, '18.474721389289424,-69.91449101405438', true, 5);
 
 INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "UbicacionActual", "Disponible", "IDVehiculo")
-VALUES ('Nicole', 'Diaz', 0, 25, '18.462184648102188,-69.95521353949235', true, 6);
+VALUES ('Nicole', 'Diaz', 25, 0, '18.462184648102188,-69.95521353949235', true, 6);
 
 INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "UbicacionActual", "Disponible", "IDVehiculo")
 VALUES ('Linette', 'Consoro', 26, 0, '18.485335365219104,-69.92568523607194', true, 7);

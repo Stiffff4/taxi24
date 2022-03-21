@@ -51,13 +51,12 @@ export class FacturaData {
         }
     }
 
-    async actualizar(factura: Factura, where: Object){
+    async actualizar(factura: Factura, id: number){
         try {
             return await this.prisma.factura.update({
-                where: where,
+                where: {ID: id},
                 data: factura
-            });
-            
+            });        
         } 
         catch (error) {
             this.validator.manejarError(error.toString());
@@ -65,10 +64,10 @@ export class FacturaData {
         }
     }
 
-    async borrar(where: Object){
+    async eliminar(id: number){
         try{
             return await this.prisma.factura.delete({
-                where: where
+                where: {ID: id}
             });
         }
         catch(error){
