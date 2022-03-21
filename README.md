@@ -85,6 +85,13 @@ Podemos ejecutar el proyecto con el comando ```npm run start:dev```
   Ano number
   Color string
   ```
+### Controladores
+
+- ```conductores```
+- ```viajes```
+- ```pasajeros```
+- ```facturas```
+- ```vehiculos```
 
 ## Endpoints funcionalidades principales
 
