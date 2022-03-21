@@ -1,6 +1,7 @@
 # Proyecto de evaluación "Taxi24"
 
-Este es un proyecto de evaluación del banco popular.
+
+Taxi24 es una compañía de taxis que necesita la construcción y diseño de APIs que otras compañías puedan utilizar para gestionar su flota de pasajeros.
 
 ## Tecnologías utilizadas
 - Framework: [NestJS](https://nestjs.com)
@@ -10,7 +11,7 @@ Este es un proyecto de evaluación del banco popular.
 ## Instrucciones de instalación
 
 ### Software imprescindible:
-- Descargar e instalar [Docker](https://www.docker.com/get-started), este será nuestro cliente de base de datos.
+- Descargar e instalar [Docker](https://www.docker.com/get-started), este será nuestro motor de base de datos.
 
 ### Dependencias
 
@@ -85,7 +86,7 @@ Podemos ejecutar el proyecto con el comando ```npm run start:dev```
   Color string
   ```
 
-### Endpoints funcionalidades principales
+## Endpoints funcionalidades principales
 
 ### Conductores
 - **Obtener una lista de todos los conductores**
@@ -179,7 +180,7 @@ Endpoint: ```api/pasajeros/obtener-conductores-cercanos``` - ```GET```
 ```
 
 
-### Endpoints CRUD
+## Endpoints CRUD
 
 #### GET 
 
