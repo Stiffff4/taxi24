@@ -12,7 +12,6 @@ export class ConductorController  {
 
     @Get('disponibles')
     async ObtenerConductoresDisponibles(){
-        console.log('aqui')
         return await this.service.obtenerConductoresDisponibles();
     }
 

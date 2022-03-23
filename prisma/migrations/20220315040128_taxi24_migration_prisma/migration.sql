@@ -10,7 +10,7 @@ CREATE TABLE "Conductor" (
     "Apellido" TEXT NOT NULL,
     "Edad" INTEGER NOT NULL,
     "ViajesCompletados" INTEGER NOT NULL,
-    "UbicacionActual" TEXT NOT NULL,
+    "Ubicacion" TEXT NOT NULL,
     "Disponible" BOOLEAN NOT NULL,
     "IDVehiculo" INTEGER NOT NULL,
 

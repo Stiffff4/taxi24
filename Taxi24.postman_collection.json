@@ -6,132 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "General",
-			"item": [
-				{
-					"name": "Obtener todos",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/{{controlador}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"{{controlador}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Obtener por ID",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/{{controlador}}/9",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"{{controlador}}",
-								"9"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Agregar",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"Nombre\": \"ConductorA\",\r\n    \"Apellido\": \"ConductorAA\",\r\n    \"Edad\": 25,\r\n    \"ViajesCompletados\": 0,\r\n    \"Ubicacion\": \"18.4710722,-69.11111111\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/{{controlador}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"{{controlador}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualizar",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"Edad\": 9\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/{{controlador}}/9",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"{{controlador}}",
-								"9"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Eliminar",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/{{controlador}}/9",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"{{controlador}}",
-								"9"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "Funcionalidades principales",
 			"item": [
 				{
@@ -188,7 +62,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"ubicacion\": \"18.4726874,-69.9431322\"\r\n}",
+									"raw": "{\r\n    \"ubicacion\": \"18.476961, -69.868120\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -240,19 +114,10 @@
 						{
 							"name": "Solicitar un viaje",
 							"request": {
-								"method": "POST",
+								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"pasajero\": 2,\r\n    \"ubicacionDestino\": \"18.468568, -69.888040\",\r\n    \"metodoPago\": \"efectivo\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
-									"raw": "http://localhost:3000/api/viajes/solicitar",
+									"raw": "http://localhost:3000/api/viajes",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -260,8 +125,7 @@
 									"port": "3000",
 									"path": [
 										"api",
-										"viajes",
-										"solicitar"
+										"viajes"
 									]
 								}
 							},
@@ -274,7 +138,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"ID\": 3,\r\n    \"Valoracion\": 4\r\n}",
+									"raw": "{\r\n    \"Valoracion\": 4\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -282,7 +146,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/viajes/completar",
+									"raw": "http://localhost:3000/api/viajes/completar/8",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -291,7 +155,8 @@
 									"path": [
 										"api",
 										"viajes",
-										"completar"
+										"completar",
+										"8"
 									]
 								}
 							},
@@ -399,6 +264,132 @@
 							"response": []
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "General",
+			"item": [
+				{
+					"name": "Obtener todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/{{controlador}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"{{controlador}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/{{controlador}}/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"{{controlador}}",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Nombre\": \"ConductorA\",\r\n    \"Apellido\": \"ConductorAA\",\r\n    \"Edad\": 25,\r\n    \"ViajesCompletados\": 0,\r\n    \"Ubicacion\": \"18.4710722,-69.11111111\",\r\n    \"Disponible\": true,\r\n    \"IDVehiculo\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/{{controlador}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"{{controlador}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Nombre\": \"NombreActualizar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/{{controlador}}/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"{{controlador}}",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/{{controlador}}/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"{{controlador}}",
+								"9"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

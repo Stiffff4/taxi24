@@ -26,28 +26,28 @@ VALUES ('Toyota', 'Supra', 2016, 'Amarillo');
 
 -- Conductores
 
-INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "UbicacionActual", "Disponible", "IDVehiculo")
+INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "Ubicacion", "Disponible", "IDVehiculo")
 VALUES ('Stephen', 'Reyes', 20, 0, '18.468698705399444,-69.92430811553743', true, 1);
 
-INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "UbicacionActual", "Disponible", "IDVehiculo")
+INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "Ubicacion", "Disponible", "IDVehiculo")
 VALUES ('Juan', 'Perez', 21, 0, '18.469376158889087,-69.94666688522612', true, 2);
 
-INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "UbicacionActual", "Disponible", "IDVehiculo")
+INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "Ubicacion", "Disponible", "IDVehiculo")
 VALUES ('David', 'Hernandez', 22,  0, '18.458621620957214,-69.92994445813926', true, 3);
 
-INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "UbicacionActual", "Disponible", "IDVehiculo")
+INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "Ubicacion", "Disponible", "IDVehiculo")
 VALUES ('Jesús', 'Gomez', 23, 0, '18.466297833277974,-69.91867379479422', true, 4);
 
-INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "UbicacionActual", "Disponible", "IDVehiculo")
+INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "Ubicacion", "Disponible", "IDVehiculo")
 VALUES ('Camila', 'Almanzar', 24, 0, '18.474721389289424,-69.91449101405438', true, 5);
 
-INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "UbicacionActual", "Disponible", "IDVehiculo")
+INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "Ubicacion", "Disponible", "IDVehiculo")
 VALUES ('Nicole', 'Diaz', 25, 0, '18.462184648102188,-69.95521353949235', true, 6);
 
-INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "UbicacionActual", "Disponible", "IDVehiculo")
+INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "Ubicacion", "Disponible", "IDVehiculo")
 VALUES ('Linette', 'Consoro', 26, 0, '18.485335365219104,-69.92568523607194', true, 7);
 
-INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "UbicacionActual", "Disponible", "IDVehiculo")
+INSERT INTO "Conductor" ("Nombre", "Apellido", "Edad", "ViajesCompletados", "Ubicacion", "Disponible", "IDVehiculo")
 VALUES ('Angie', 'Pimentel', 27, 0, '18.477251120889402,-69.950965944892', true, 8);
 
 -- Pasajeros

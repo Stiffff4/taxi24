@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { Conductor } from "@prisma/client";
-import { PrismaData } from "../../database/prisma/prisma.data";
+import { PrismaData } from "../../prisma/prisma.data";
 
 @Injectable()
 export class DistanceData{
@@ -16,7 +16,7 @@ export class DistanceData{
         
         const ubicacionesConductores = (await this.prisma.conductor.findMany())
                                             .filter(x => x.Disponible == true)
-                                            .map(x => x.UbicacionActual);
+                                            .map(x => x.Ubicacion);
 
         for(let i=0; i<ubicacionesConductores.length; i++){
             const latitudC = parseFloat(ubicacionesConductores[i].split(',')[0]);
@@ -25,7 +25,7 @@ export class DistanceData{
 
             const conductor = await this.prisma.conductor.findFirst({
                     where: {
-                        UbicacionActual: ubicacionesConductores[i],
+                        Ubicacion: ubicacionesConductores[i],
                     }
                 }
             )
@@ -38,7 +38,7 @@ export class DistanceData{
             if (conductoresDisponiblesCercanos.length >= contador) break;
         }
 
-        return conductoresDisponiblesCercanos;
+        return conductoresDisponiblesCercanos.sort((a, b) => (a.ID - b.ID));
     }
     
     calcularDistanciaKM(lat1: number, lng1: number, lat2: number, lng2: number) {

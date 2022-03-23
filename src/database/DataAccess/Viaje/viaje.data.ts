@@ -2,7 +2,7 @@ import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundExc
 import { Viaje, Pasajero, Conductor } from "@prisma/client";
 import { PrismaData } from "../../prisma/prisma.data"; 
 import { ValidationService } from "../../../services/Validation/validation.service";
-import { DistanceData } from "../../../services/Distance/distance.data";
+import { DistanceData } from "../Distance/distance.data";
 import { FacturaData } from "../Factura/factura.data";
 
 @Injectable()
@@ -65,7 +65,7 @@ export class ViajeData {
 
     async obtenerTodos(){
         try{
-            return await this.prisma.viaje.findMany();
+            return await this.prisma.viaje.findMany({orderBy: {ID: 'asc'}});
         }
         catch(error){
             this.validar.manejarError(error.toString());
@@ -197,7 +197,7 @@ export class ViajeData {
     private async actualizarInfoConductor(conductor: Conductor, ubicacion: string){
         return await this.prisma.conductor.update({
             where: {ID: conductor.ID}, 
-            data: {UbicacionActual: ubicacion, ViajesCompletados: (conductor.ViajesCompletados+1)}
+            data: {Ubicacion: ubicacion, ViajesCompletados: (conductor.ViajesCompletados+1)}
         });
     }
     

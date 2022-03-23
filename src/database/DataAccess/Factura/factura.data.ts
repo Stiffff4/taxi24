@@ -23,7 +23,7 @@ export class FacturaData {
 
     async obtenerTodos(){
         try{
-            return await this.prisma.factura.findMany();
+            return await this.prisma.factura.findMany({orderBy: {ID: 'asc'}});
         }
         catch(error){
             this.validator.manejarError(error.toString());

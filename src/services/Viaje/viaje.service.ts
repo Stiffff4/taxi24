@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { Conductor, Pasajero, Viaje } from "@prisma/client";
 import { PasajeroData } from "../../database/DataAccess/Pasajero/pasajero.data";
 import { ViajeData } from "../../database/DataAccess/Viaje/viaje.data";
-import { DistanceData } from "../Distance/distance.data";
+import { DistanceData } from "../../database/DataAccess/Distance/distance.data";
 import { ValidationService } from "../Validation/validation.service";
 
 @Injectable()
@@ -19,9 +19,15 @@ export class ViajeService {
             this.validar.arrayVacioNulo(Object.values(body));
             this.validar.propiedadesIncorrectas(body, ['pasajero', 'ubicacionDestino', 'metodoPago']);
 
+            if (body.metodoPago.toString() != "efectivo" && body.metodoPago.toString() != "tarjeta"){
+                throw new HttpException('Método de pago inválido.', HttpStatus.BAD_REQUEST);
+            }
+
             const viaje: Viaje = await this.data.obtenerUno(
                 {"IDPasajero": body.pasajero, "Activo": true},
             );
+
+
             const pasajero: Pasajero = await this.dataPasajero.obtenerPorId(body.pasajero);
 
             const conductorCercano: Conductor = (await this.distancia.obtenerConductoresDisponiblesCercanos(pasajero.Ubicacion, 1))[0];
@@ -55,7 +61,7 @@ export class ViajeService {
             this.validar.propiedadesIncorrectas(body, ['Valoracion']);
             this.validar.idInvalido(id);
 
-            if (body.Valoracion < 0 || body.Valoracion > 5) throw new HttpException('Valoración inválida', HttpStatus.BAD_REQUEST)
+            if (body.Valoracion < 1 || body.Valoracion > 5) throw new HttpException('Valoración inválida', HttpStatus.BAD_REQUEST)
 
             const viaje: Viaje = await this.data.obtenerPorId(id);
                         

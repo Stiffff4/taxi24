@@ -69,7 +69,7 @@ export class ConductorService {
         try {
             this.validar.cuerpoVacio(conductor);
             this.validar.arrayVacioNulo(Object.values(conductor));
-            this.validar.ubicacion(conductor.UbicacionActual);
+            this.validar.ubicacion(conductor.Ubicacion);
 
             return await this.data.agregar(conductor);
         } 

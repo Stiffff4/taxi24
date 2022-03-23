@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { Conductor } from "@prisma/client";
 import { PrismaData } from "../../prisma/prisma.data"; 
 import { ValidationService } from "../../../services/Validation/validation.service";
-import { DistanceData } from "../../../services/Distance/distance.data";
+import { DistanceData } from "../Distance/distance.data";
 
 @Injectable()
 export class ConductorData {
@@ -25,7 +25,7 @@ export class ConductorData {
 
     async obtenerTodos(){
         try{
-            return await this.prisma.conductor.findMany();
+            return await this.prisma.conductor.findMany({orderBy: {ID: 'asc'}});
         }
         catch(error){
             this.validar.manejarError(error.toString());
@@ -45,7 +45,7 @@ export class ConductorData {
 
     async obtenerConductoresDisponibles(){
         try {
-            return await this.prisma.conductor.findMany({where: {Disponible: true}});
+            return await this.prisma.conductor.findMany({where: {Disponible: true}, orderBy: {ID: 'asc'}});
         }
         catch(error){
             this.validar.manejarError(error.toString());

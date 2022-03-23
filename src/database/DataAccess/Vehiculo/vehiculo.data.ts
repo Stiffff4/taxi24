@@ -13,7 +13,7 @@ export class VehiculoData {
 
     async obtenerTodos(){
         try{
-            return await this.prisma.vehiculo.findMany()
+            return await this.prisma.vehiculo.findMany({orderBy: {ID: 'asc'}})
         }
         catch(error){
             this.validator.manejarError(error.toString());

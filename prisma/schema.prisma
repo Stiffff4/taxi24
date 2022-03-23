@@ -16,7 +16,7 @@ model Conductor{
   Apellido String
   Edad Int
   ViajesCompletados Int
-  UbicacionActual String
+  Ubicacion String
   Disponible Boolean
   IDVehiculo Int
 

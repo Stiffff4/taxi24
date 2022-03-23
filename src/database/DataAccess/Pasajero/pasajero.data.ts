@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { Pasajero } from "@prisma/client";
 import { PrismaData } from "../../prisma/prisma.data"; 
 import { ValidationService } from "../../../services/Validation/validation.service";
-import { DistanceData } from "../../../services/Distance/distance.data";
+import { DistanceData } from "../Distance/distance.data";
 
 @Injectable()
 export class PasajeroData {
@@ -24,7 +24,7 @@ export class PasajeroData {
 
     async obtenerTodos(){
         try{
-            return await this.prisma.pasajero.findMany();
+            return await this.prisma.pasajero.findMany({orderBy: {ID: 'asc'}});
         }
         catch(error){
             this.validar.manejarError(error.toString());
