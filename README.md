@@ -1,3 +1,9 @@
+# Proyecto de evaluación "Taxi24"
+
+Taxi24 es una compañía de taxis que necesita la construcción y diseño de APIs que otras compañías puedan utilizar para gestionar su flota de pasajeros.
+
+## Índice
+
 - [Proyecto de evaluación "Taxi24"](#proyecto-de-evaluaci-n--taxi24-)
   * [Tecnologías utilizadas](#tecnolog-as-utilizadas)
   * [Instrucciones de instalación](#instrucciones-de-instalaci-n)
@@ -17,11 +23,6 @@
       - [POST](#post)
       - [PUT](#put)
       - [DELETE](#delete)
-
-# Proyecto de evaluación "Taxi24"
-
-
-Taxi24 es una compañía de taxis que necesita la construcción y diseño de APIs que otras compañías puedan utilizar para gestionar su flota de pasajeros.
 
 ## Tecnologías utilizadas
 - Framework: [NestJS](https://nestjs.com)
@@ -66,7 +67,7 @@ Podemos ejecutar el proyecto con el comando ```npm run start:dev```
   Apellido string
   Edad number
   ViajesCompletados number
-  UbicacionActual string
+  Ubicacion string
   Disponible boolean
   IDVehiculo number
   ```
@@ -195,7 +196,7 @@ Endpoint: ```api/pasajeros/{id}``` - ```GET```
 
 - Para un pasajero solicitando un viaje, obtenga una lista de los 3 conductores más cercanos al punto de partida.
 
-Endpoint: ```api/pasajeros/obtener-conductores-cercanos``` - ```GET```
+Endpoint: ```api/pasajeros/conductores-cercanos``` - ```GET```
 
 ```json 
 {
