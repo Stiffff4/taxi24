@@ -67,7 +67,7 @@ Podemos ejecutar el proyecto con el comando ```npm run start:dev```
   Apellido string
   Edad number
   ViajesCompletados number
-  UbicacionActual string
+  Ubicacion string
   Disponible boolean
   IDVehiculo number
   ```
